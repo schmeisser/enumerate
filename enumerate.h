@@ -4,7 +4,6 @@
 #include <utility>
 
 namespace iter {
-
 template <typename T> class enumerator;
 
 //! Enumerate container / range-expression
@@ -14,6 +13,7 @@ template <typename T> class enumerator;
  * This is especially useful in combination with C++17 structured bindings in
  * range-based for loops, e.g.:
  *     for (auto [i, v] : enumerate(vec))
+ *
  * The argument \a c is stored by reference in enumerator and thus must outlive
  * the enumerator, otherwise the behavior is undefined.
  * \param c The container to enumerate
@@ -28,16 +28,17 @@ template <typename T> auto enumerate(T& c) {
 /*! This is an overload for rvalue expressions (temporaries). To allow useful
  * calls like for (auto [i, v] : enumerate(temp_expression)), the temporary is
  * moved to a member of the enumerator to extend its lifetime.
- * This requires \tparam T to be move-constructible.
+ * This requires \c T to be move-constructible.
  */
 template <typename T> auto enumerate(T&& c) {
     // Rvalue reference, move to extend lifetime.
     return enumerator<T>(std::move(c));
 }
 
-//! An enumerate_iterator wraps an iterator of type \c It and produces a pair of
-//! an enumeration index as well as the original element produced by iterator
-//! \c It.
+//! An enumerate_iterator wraps an iterator of type \c It and produces a pair...
+/*! of an enumeration index as well as the original element produced by iterator
+ * \c It.
+ */
 template <typename It> class enumerate_iterator {
     size_t idx;
     It it;
