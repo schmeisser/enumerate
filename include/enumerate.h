@@ -9,7 +9,7 @@ template <typename T> class enumerator;
 //! Enumerate container / range-expression
 /*! The iterators of the returned range produce std::pairs containing
  * - the 0-based index of the element
- * - a reference to element the original iterator refers to.
+ * - a reference to the element the original iterator refers to.
  * This is especially useful in combination with C++17 structured bindings in
  * range-based for loops, e.g.:
  *     for (auto [i, v] : enumerate(vec))
